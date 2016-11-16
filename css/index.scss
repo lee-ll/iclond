@@ -58,6 +58,10 @@ body{
 	           font-size:21px;
 	           position:absolute;
 	           color:#999;
+	           cursor:pointer;
+	           &:hover{
+	              color: #bfbfbf;
+	           }
 	         }
 	         .iclond{
 	            background-image: url(../img/packed-5.png);
@@ -85,6 +89,7 @@ body{
 		     width: 23px;
 		     top: 10px;
 		     height: 23px;
+		     cursor:pointer;
 		     .add-img{
 		       position:absolute;
 		       background-image: url(../img/packed-5.png);
@@ -207,6 +212,9 @@ body{
 				    background-image: url(../img/packed-5.png);
 				    background-position: -119px -497px;
 				    background-repeat: no-repeat;
+				    &:hover{
+				      background-position: 0px -526px;
+				    }
 			      }
 
 			    }
@@ -409,11 +417,14 @@ body{
 		      label{
 			       line-height: 29px;
 			       margin-top: -13px;
-			       cursor: inherit;
+			       cursor:pointer;
 	               top: 50%;
 	               position:absolute;
                    color: #b14bc9;
                    font-size: 19px;
+                   &:hover{
+                          color: #6a157d ;
+                   }
 		      }
 		    }
         }
@@ -909,8 +920,9 @@ body{
     top: 15px;
     height: 305px;
     position:absolute;
-    z-index:100;
+    z-index:50;
     background:red;
+    display:none;
     .sanjiao{
        right: -28px;
        margin-top: -8px;
@@ -1058,6 +1070,8 @@ body{
     width: 450px;
     top: 50%;
     height: 170px;
+    z-index:70;
+    display:none;
     &:before{
         position: absolute;
 	    top: -5px;
@@ -1125,7 +1139,7 @@ body{
 			    top: 5px;
 			    bottom: 0px;
 			    position:absolute;
-			    cursor: inherit;
+			    cursor: pointer;
 			    line-height:44px;
 			    color: #167efb;
 			    font-size:17px;
@@ -1156,4 +1170,28 @@ body{
 		    }
 	    }
     }
+}
+//hover效果
+.body .body-left .left-head .remind .add:hover .add-img{
+		        background-image: url(../img/packed-5.png);
+			    background-position: -92px -526px;
+			    background-repeat: no-repeat;
+			    height: 23px;
+			    width: 23px;
+			    left: 0px;
+			    top: 0px;
+			    position:absolute;               
+}
+.zhezhao{
+	position:absolute;
+	left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    min-width: 950px;
+    min-height: 550px;
+    opacity: 1;
+    background: rgba(0,0,0,0.25);
+    z-index: 60;
+    display:none;
 }

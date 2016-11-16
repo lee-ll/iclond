@@ -57,7 +57,10 @@ body {
             top: 50%;
             font-size: 21px;
             position: absolute;
-            color: #999; }
+            color: #999;
+            cursor: pointer; }
+            .body .body-left .left-head .remind .remind-inner label:hover {
+              color: #bfbfbf; }
           .body .body-left .left-head .remind .remind-inner .iclond {
             background-image: url(../img/packed-5.png);
             background-position: 0px -588px;
@@ -80,7 +83,8 @@ body {
           right: 12px;
           width: 23px;
           top: 10px;
-          height: 23px; }
+          height: 23px;
+          cursor: pointer; }
           .body .body-left .left-head .remind .add .add-img {
             position: absolute;
             background-image: url(../img/packed-5.png);
@@ -193,6 +197,8 @@ body {
                   background-image: url(../img/packed-5.png);
                   background-position: -119px -497px;
                   background-repeat: no-repeat; }
+                  .body .body-left .left-body .list .lists .list1 .list1-inner .list1-neirong .wifi:hover {
+                    background-position: 0px -526px; }
 
 .row-top {
   position: absolute;
@@ -371,11 +377,13 @@ body {
           .body-right .content .content-inner .cont-title .select label {
             line-height: 29px;
             margin-top: -13px;
-            cursor: inherit;
+            cursor: pointer;
             top: 50%;
             position: absolute;
             color: #b14bc9;
             font-size: 19px; }
+            .body-right .content .content-inner .cont-title .select label:hover {
+              color: #6a157d; }
       .body-right .content .content-inner .content-body {
         position: absolute;
         left: 0px;
@@ -813,8 +821,9 @@ body {
   top: 15px;
   height: 305px;
   position: absolute;
-  z-index: 100;
-  background: red; }
+  z-index: 50;
+  background: red;
+  display: none; }
   .xiangxi-box .sanjiao {
     right: -28px;
     margin-top: -8px;
@@ -943,8 +952,10 @@ body {
   margin-left: -225px;
   left: 50%;
   width: 450px;
-  top: 75%;
-  height: 170px; }
+  top: 50%;
+  height: 170px;
+  z-index: 70;
+  display: none; }
   .clearall:before {
     position: absolute;
     top: -5px;
@@ -1008,7 +1019,7 @@ body {
         top: 5px;
         bottom: 0px;
         position: absolute;
-        cursor: inherit;
+        cursor: pointer;
         line-height: 44px;
         color: #167efb;
         font-size: 17px;
@@ -1033,3 +1044,26 @@ body {
         color: #167efb;
         cursor: pointer;
         font-size: 17px; }
+
+.body .body-left .left-head .remind .add:hover .add-img {
+  background-image: url(../img/packed-5.png);
+  background-position: -92px -526px;
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+  left: 0px;
+  top: 0px;
+  position: absolute; }
+
+.zhezhao {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  min-width: 950px;
+  min-height: 550px;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 60;
+  display: none; }
