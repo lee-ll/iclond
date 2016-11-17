@@ -15,6 +15,66 @@ body{
   font-family:"Microsoft YaHei",sans-serif;
   box-sizing:border-box;
 }
+//主题颜色
+$waihuan:(
+    'purple':0px 0px,
+    'green':0px -33px,
+    'blue':0px -66px,
+    'yellow':0px -99px,
+    'brown':0px -132px,
+    'red': 0px -165px,
+    'orange':0px -198px
+);
+@each $v in map_keys($waihuan){
+   $l:map_get($waihuan,$v);
+   .circle.#{$v}{
+       background-image: url(../img/stylesheet-1.png);
+       background-position: nth($l,1) nth($l,2);
+       background-repeat: no-repeat;
+   }
+ }
+ //左侧小圆点
+$color:(
+   'purple': -34px -571px #b14bc9,
+   'green':0px -571px #49bf1f,
+   'blue':-51px -571px #1badf8,
+   'yellow':-85px -571px #e0ac00,
+   'brown':-133px -549px #a2845e,
+   'red': -68px -571px #ff2968,
+   'orange':-102px -571px #ff7f00
+);
+ @each $v in map_keys($color){
+   $l:map_get($color,$v);
+   .color.#{$v}{
+    background-position:nth($l,1) nth($l,2);
+    background-image: url(../img/packed-5.png);
+	background-repeat: no-repeat;
+   }
+   .content.#{$v}{
+     color:nth($l,3);
+   }
+   .xuanxiang .inner .neili .biaomin .padding input.#{$v}{
+      color:nth($l,3);
+   }
+ }
+ $incolor:( 
+    "purple": 0px -231px,
+    "green":  0px -256px,
+    "blue":   0px -281px,
+    "yellow": 0px -306px,
+    "brown":  0px -331px,
+    "red":    0px -356px,
+    "orange": 0px -381px
+   );
+ @each $a in map_keys($incolor){
+   $l:map_get($incolor,$a);
+   .in-color.#{$a}{
+      background-position:nth($l,1) nth($l,2);
+      background-image: url(../img/stylesheet-1.png);
+	  background-repeat: no-repeat;
+   }
+ }
+
 .body{
 	width:100%;
 	height:100%;
@@ -27,11 +87,13 @@ body{
 	top:0;
 	right:0;
 	bottom:0;
+	overflow:hidden;
 	.body-left{
 	 width:389px;
 	 float:left;
 	 height:100%;
 	 background: #383836;
+	 overflow:auto;
 	.left-head{
 		 width:100%;
 		 height:44px;
@@ -105,10 +167,11 @@ body{
 	 }
 	.left-body{
 		width:389px;
-		height:auto;
+		min-height:660px;
 		position:absolute;
 		left:0;
 		top:45px;
+		overflow:auto;
 		.list{
 		  position:absolute;
 		  left: 0px;
@@ -122,8 +185,10 @@ body{
 		    position:absolute;
 		    z-index: 1;
 		    overflow: visible;
-		    background: rgb(45, 45, 43);
 		    background-repeat: repeat;
+		    &.active{
+		       background: rgb(45, 45, 43);
+		    }
 		    .plan-inner{
 		      position:absolute;
 		      left:4px;
@@ -160,13 +225,15 @@ body{
 		   right:0;
 		   top:45px;
 		   bottom:0;
-		   min-height:176px;
+		   min-height:660px;
+		   overflow:auto;
 		   .list1{
-              left: 0px;
-			  right: 0px;
-			  top: 0px;
 			  height: 44px;
-			  position:absolute;
+			  width:100%;
+			  position:relative;
+			  & .active{
+			    background:rgb(45, 45, 43);
+			  }
 			  .list1-inner{
 			    left: 0px;
 			    right: 0px;
@@ -174,21 +241,18 @@ body{
 			    bottom: 0px;
 			    .list1-neirong{
 			      position:absolute;
-			      left: 4px;
+			      left: 0px;
 			      right: 0px;
 			      top: 0px;
 			      bottom: 0px;
 			      .color{
-			        background-image: url(../img/packed-5.png);
-				    background-position: -34px -571px;
-				    background-repeat: no-repeat;
 				    position: absolute;
 				    left: 12px;
 				    top: 12px;
 				    height: 17px;
 				    width: 17px;
 			      }
-			      .title{
+			      .title,input{
 			        position: absolute;
 				    height: 24px;
 				    line-height: 24px;
@@ -200,6 +264,11 @@ body{
 				    white-space: nowrap !important;
 				    font-size: 17px;
 				    color: #fff;
+			      }
+			      input{
+			        background:transparent;
+			        border:none;
+			        outline-style:none;
 			      }
 			      .wifi{
 			        position: absolute;
@@ -244,14 +313,14 @@ body{
 	background-image: url(../img/packed-1.png);
 	background-position: 0px 0px;
 	background-repeat: repeat;
-	left: 0px;
+	left: 44px;
 }
 .body-right{
 	position:absolute;
 	left: 389px;
     top: 0px;
     bottom: 0px;
-    width: 960px;
+    min-width: 950px;
     .search{
      position:absolute;
      left: 0px;
@@ -395,12 +464,11 @@ body{
 		    top: 0px;
 		    height: 62px;
 		    .list-name{
-		        postion:absolute;
+		        position:absolute;
 		        left: 0px;
 			    right: 200px;
 			    top: 0px;
 			    bottom: 10px;
-			    color: #b14bc9;
 			    white-space: nowrap !important;
 			    font-size: 40px;
 			    line-height: 1.2;
@@ -420,7 +488,6 @@ body{
 			       cursor:pointer;
 	               top: 50%;
 	               position:absolute;
-                   color: #b14bc9;
                    font-size: 19px;
                    &:hover{
                           color: #6a157d ;
@@ -509,7 +576,6 @@ body{
 							    bottom: 10px;
 							    cursor:pointer;
 							    label{
-							        color: #b14bc9;
 							        font-size: 20px;
 								    text-align: right;
 								    line-height: 24px;
@@ -542,122 +608,7 @@ body{
 							    top: 54px;
 							    bottom: 0px;
 							    min-height: 94px;
-							    .line1{
-							        position:absolute;
-							        left: 0px;
-								    right: 0px;
-								    top: 42px;
-								    height: 52px;
-								    .xian-top{
-								        position: absolute;
-									    left: 30px;
-									    right: 0px;
-									    height: 2px;
-									    background-image: url(../img/packed-3.png);
-									    background-position: 0px 0px;
-									    background-repeat: repeat;
-									    top: 0px;
-								    }
-								    .xian-bottom{
-								        position: absolute;
-									    left: 30px;
-									    right: 0px;
-									    height: 2px;
-									    background-image: url(../img/packed-3.png);
-									    background-position: 0px 0px;
-									    background-repeat: repeat;
-									    overflow: visible;
-									    bottom: -2px;
-								    }
-								    .xian-li{
-								        position: absolute;
-									    left: 0;
-									    top: 0;
-									    right: 0;
-									    bottom: 0;
-									    a{
-								            position: absolute;
-										    top: 12px;
-										    left: 36px;
-										    height: 32px;
-										    width: 32px;
-										    cursor: pointer;
-										    border: transparent !important;
-										    .state{
-										        height: 32px;
-											    width: 32px;
-											    margin: 0px;
-											    background: transparent;
-											    border: none;
-										    }
-										     .unchecked{
-											        background-image: url(../img/packed-5.png);
-												    background-position: -64px -401px;
-												    background-repeat: no-repeat;
-											}
-											.checked{
-											        background-image: url(../img/packed-5.png);
-												    background-position: -128px -401px;
-												    background-repeat: no-repeat;
-											}
-									    }
-									    label{
-									        position:absolute;
-									        right: 106px;
-									        color: rgba(51,51,51,0.6);
-									        font-size: 19px;
-										    line-height: 24px;
-										    left: 81px;
-										    top:17px;
-										    height: auto;
-									    }
-									    .hidden{
-									        left: 81px;
-										    top: 24px;
-										    position: absolute;
-										    height: auto;
-										    margin-top: -14px;
-										    padding-top: 4px;
-										    padding-right: 20px;
-										    label{
-										        overflow: hidden !important;
-											    text-overflow: ellipsis !important;
-											    white-space: nowrap !important;
-											    color: #333;
-											    font-size: 19px;
-											    line-height: 24px;
-											    height: auto;
-											    width: auto;
-											    display: inline;
-											    position: static;
-											    top:50%;
-											    margin-top:-9px;
-											    left:4px;
-											    right:4px;
-											    display:none;
-										    }
-									    }
-									    .mes{
-									        position: absolute;
-										    right: 25px;
-										    top: 17px;
-										    label{
-										        margin: 0px;
-											    overflow: hidden !important;
-											    text-overflow: ellipsis !important;
-											    white-space: nowrap !important;
-											    font-size: 19px;
-											    height: 21px;
-											    text-align: right;
-											    left: 0px;
-											    right: 0px;
-											    position: relative;
-											    top:50%;
-											    color: #b14bc9;
-										    }
-									    } 
-								    }
-							    }
+							   
 							    .date{
 							        position:absolute;
 							        right: 0px;
@@ -682,12 +633,22 @@ body{
       }
     }
 }
-.new{
+.new-box{
 	position:absolute;
+	width:100%;
+	height:100%;
 	left: 0px;
     right: 0px;
     top: 162px;
+    .new-ul{
+	    width:100%;
+	    height:100%;
+    }
+}
+.new{
+	width:100%;
     height: 52px;
+    position:relative;
     .xian-top{
         position: absolute;
 	    right: 0px;
@@ -717,9 +678,18 @@ body{
     }
 }
 //选项
+.xq-box{
+	left: 0px;
+    right: 0px;
+    top: 54px;
+    bottom: 0px;
+    min-height: 198px;
+    position:absolute;
+    background:red;
+}
 .xuanxiang{
 	position:absolute;
-	left: 913px;
+	left: 900px;
     width: 355px;
     top: 15px;
     height: 226px;
@@ -784,7 +754,6 @@ body{
                    input{
                       margin-top: 1px;
                       font-size: 25px;
-                      color: #b14bc9 ;
                       outline:none;
                       border:none;
                    }
@@ -812,13 +781,8 @@ body{
 			        height: 33px;
 				    width: 33px;
 				    float: left;
-				    background-image: url(../img/stylesheet-1.png);
-				    background-position: 0px 0px;
-				    background-repeat: no-repeat;
+				    margin-left:10px;
 				    .in-color{
-				        background-image: url(../img/stylesheet-1.png);
-					    background-position: 0px -231px;
-					    background-repeat: no-repeat;
 					    width: 25px;
 					    height: 25px;
 					    margin-top: 4px;
@@ -1194,4 +1158,136 @@ body{
     background: rgba(0,0,0,0.25);
     z-index: 60;
     display:none;
+}
+
+.a{
+	width:200px;
+	height:50px;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:200;
+	.color{
+	  height:100%;
+	  float:left;
+	  width:50px;
+	}
+}
+.line1-box{
+	position:relative;
+	width:100%;
+	height:100%;
+	top:42px;
+	 .line1{
+        width:100%;
+	    height: 52px;
+	    position:relative;
+	    .xian-top{
+	        position: absolute;
+		    left: 30px;
+		    right: 0px;
+		    height: 2px;
+		    background-image: url(../img/packed-3.png);
+		    background-position: 0px 0px;
+		    background-repeat: repeat;
+		    top: 0px;
+	    }
+	    .xian-bottom{
+	        position: absolute;
+		    left: 30px;
+		    right: 0px;
+		    height: 2px;
+		    background-image: url(../img/packed-3.png);
+		    background-position: 0px 0px;
+		    background-repeat: repeat;
+		    overflow: visible;
+		    bottom: -2px;
+	    }
+	    .xian-li{
+	        position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    a{
+	            position: absolute;
+			    top: 12px;
+			    left: 36px;
+			    height: 32px;
+			    width: 32px;
+			    cursor: pointer;
+			    border: transparent !important;
+			    .state{
+			        height: 32px;
+				    width: 32px;
+				    margin: 0px;
+				    background: transparent;
+				    border: none;
+			    }
+			     .unchecked{
+				        background-image: url(../img/packed-5.png);
+					    background-position: -64px -401px;
+					    background-repeat: no-repeat;
+				}
+				.checked{
+				        background-image: url(../img/packed-5.png);
+					    background-position: -128px -401px;
+					    background-repeat: no-repeat;
+				}
+		    }
+		    label{
+		        position:absolute;
+		        right: 106px;
+		        font-size: 19px;
+			    line-height: 24px;
+			    left: 81px;
+			    top:17px;
+			    height: auto;
+		    }
+		    .hidden{
+		        left: 81px;
+			    top: 24px;
+			    position: absolute;
+			    height: auto;
+			    margin-top: -14px;
+			    padding-top: 4px;
+			    padding-right: 20px;
+			    label{
+			        overflow: hidden !important;
+				    text-overflow: ellipsis !important;
+				    white-space: nowrap !important;
+				    color: #333;
+				    font-size: 19px;
+				    line-height: 24px;
+				    height: auto;
+				    width: auto;
+				    display: inline;
+				    position: static;
+				    top:50%;
+				    margin-top:-9px;
+				    left:4px;
+				    right:4px;
+				    display:none;
+			    }
+		    }
+		    .mes{
+		        position: absolute;
+			    right: 25px;
+			    top: 17px;
+			    label{
+			        margin: 0px;
+				    overflow: hidden !important;
+				    text-overflow: ellipsis !important;
+				    white-space: nowrap !important;
+				    font-size: 19px;
+				    height: 21px;
+				    text-align: right;
+				    left: 0px;
+				    right: 0px;
+				    position: relative;
+				    top:50%;
+			    }
+		    } 
+	    }
+    }
 }

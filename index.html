@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="remainder">
 <head>
 	<meta charset="UTF-8">
 	<title>iclond</title>
 	<link rel="stylesheet" href="./css/index.css">
+	<script src="http://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+	<script src="js/index.js"></script>
 </head>
-<body>
+<body ng-controller="mainCtrol">
 	<div class="body">
 		<div class="body-left">
 			<div class="left-head">
@@ -15,14 +18,14 @@
 						<div class="iclond"></div>
 						<div class="xiala"></div>
 					</div>
-					<div class="add">
+					<div class="add" ng-click="addlist();save()">
 						<div class="add-img"></div>
 				    </div>
 				</div>
 			</div>
 			<div class="left-body">
 				<div class="list">
-					<div class="plan">
+					<div class="plan" ng-click="chbg($event)">
 						<div class="plan-inner">
 							<div class="clock"></div>
 							<label >已计划</label>
@@ -30,12 +33,13 @@
 						<div class="row-top"></div>
 						<div class="row-bottom"></div>
 					</div>
-					<div class="lists">
-						<div class="list1">
+					<div ng-x>
+						<div class="list1" ng-repeat="v in Lists track by $index" ng-class="{active:cu==index}">
 							<div class="list1-inner">
 								<div class="list1-neirong">
-									<div class="color"></div>
-									<div class="title">提醒</div>
+									<div class="color {{v.theme}}"></div>
+									<div class="title">{{v.name}}</div>
+									<input type="text" ng-model="v.name" ng-keyup="save()">
 									<div class="wifi"></div>
 								</div>
 								<div class="row-top"></div>
@@ -43,6 +47,7 @@
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -68,13 +73,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="content">
+			<div class="content {{Lists[cu].theme}}">
 				<div class="content-inner">
 					<div class="cont-title">
-						<div class="list-name">提醒</div>
-						<div class="select">
+						<div class="list-name {{Lists[cu].theme}}">{{Lists[cu].name}}</div>
+						<div sel>
 							<label >选项</label>
-						</div>
+						</div>	
 					</div>
 					<div class="content-body">
 						<div class="hengxian"></div>
@@ -93,32 +98,38 @@
 										<div class="xian-img"></div>
 									</div>
 									<div class="xiangqing">
-										<div class="line1">
-											<div class="xian-top"></div>
-											<div class="xian-bottom"></div>
-											<div class="xian-li">
-												<a href="#">
-													<div class="state unchecked"></div>
-												</a>
-												<label>adgsgbh</label>
-												<div class="hidden">
-													<label>asdgag</label>
-												</div>
-												<div class="mes">
-													<label >详细信息</label>
+										<div class="line1-box">
+											<div class="line1">
+												<div class="xian-top"></div>
+												<div class="xian-bottom"></div>
+												<div class="xian-li">
+													<a href="#">
+														<div class="state unchecked"></div>
+													</a>
+													<label>adgsgbh</label>
+													<div class="hidden">
+														<label>asdgag</label>
+													</div>
+													<div class="mes">
+														<label >详细信息</label>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="date">
+	                                     </div>
+										 <div class="date">
 											<label>2016年11月16日 星期三</label>
-										</div>
+										 </div>
 									</div>
 								</div>
-								<div class="new">
-									<div class="xian-top"></div>
-									<div class="xian-bottom"></div>
-									<label class="xian-nei">新项目...</label>
-								</div>
+								<div class="new-box">
+                                    <div class="new-ul">
+										<div class="new">
+											<div class="xian-top"></div>
+											<div class="xian-bottom"></div>
+											<label class="xian-nei">新项目...</label>
+										</div>
+									</div>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -134,17 +145,17 @@
 				<div class="biaomin">
 					<div class="border"></div>
 					<div class="padding">
-						<input type="text" value="提醒">
+						<input type="text" ng-model="Lists[cu].name" class="{{Lists[cu].theme}}" >
 					</div>
 				</div>
 				<div class="list-color">列表颜色</div>
-				<div class="color-ji">
-					<div class="circle">
-						<div class="in-color"></div>
+				<div class="color-ji" >
+					<div class="circle {{Lists[cu].theme==v?v:''}}" ng-repeat="v in colors" ng-click="Lists[cu].theme=v">
+						<div class="in-color {{v}}"></div>
 					</div>
 				</div>
 				<div class="caozuo">
-					<div class="delete">删除</div>
+					<div class="delete" ng-click="remove($index)">删除</div>
 					<div class="quxiao">
 						<div class="qu">取消</div>
 					</div>
