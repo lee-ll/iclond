@@ -1,5 +1,5 @@
 var app=angular.module("remainder",[]);
- app.directive("ngX",[function(){
+  app.directive("ngX",[function(){
      	return{
      		restrict:'A',
      		template: ' <div class="lists"><div ng-transclude></div></div>' ,
@@ -7,6 +7,7 @@ var app=angular.module("remainder",[]);
      		transclude:true,
      		link:function($scope,el){
      			$(el).on("keyup",false);
+     			$(".xiangqing").on("keyup",false);
      			$(el).on("click",".list1",function(){
      				$(el).find(".list1").find(".list1-neirong").removeClass("active")
      				$(el).find(".list1").find(".row-bottom").css("left",44);
@@ -19,6 +20,11 @@ var app=angular.module("remainder",[]);
      				$scope.$apply(function(){
      					$scope.cu=$(that).index();
      				})
+     				for(var i=0;i<7;i++){
+     					$(".line1 .xian-top1").removeClass($scope.Lists[i].theme)
+	     				$(".line1 .xian-bottom1").removeClass($scope.Lists[i].theme)
+	     				$(".line1 .bgcolor").removeClass($scope.Lists[i].theme)
+     				}
      			});
      			$(document).on("keyup",function(e){
      				if(e.keyCode===8){
@@ -33,16 +39,82 @@ var app=angular.module("remainder",[]);
      				}
 
      			})
+     			$(document).on("keyup",function(e){
+     				
+
+     			})
+     			$(".line1-list").on("click",".line1",function(){
+     				console.log(this)
+     				var index=$(".line1").index($(this));
+     				$(".line1 .xian-top1").removeClass($scope.Lists[$scope.cu].theme)
+     				$(".line1 .xian-bottom1").removeClass($scope.Lists[$scope.cu].theme)
+     				$(".line1 .bgcolor").removeClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .xian-top1").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .xian-bottom1").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .bgcolor").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .mes").hide();
+                    $(".line1 .mes").eq(index).show();
+     			})
+     			$(document).on("click",".mes",function(){
+
+     				$(".xiangxi-box").show();
+     			})
      		}
-     	}}])   
- app.controller('mainCtrol',['$scope',function($scope){
+     	}}])
+  app.directive("xiangqing",[function(){
+     	return{
+     		restrict:'A',
+     		template: ' <div class="xiangqing-box"><div ng-transclude></div></div>' ,
+     		replace:true,
+     		transclude:true,
+     		link:function($scope,el){
+     			$(".line1-list").on("click",".line1",function(){
+     				var index=$(".line1").index($(this));
+     				$(".line1 .xian-top1").removeClass($scope.Lists[$scope.cu].theme)
+     				$(".line1 .xian-bottom1").removeClass($scope.Lists[$scope.cu].theme)
+     				$(".line1 .bgcolor").removeClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .xian-top1").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .xian-bottom1").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .bgcolor").eq(index).addClass($scope.Lists[$scope.cu].theme)
+                    $(".line1 .mes").hide();
+                    $(".line1 .mes").eq(index).show();
+     			})
+     			$(".clear").on("click",function(){
+     				$(".clearall").show();
+     				$(".zhezhao").show();
+     			})
+     			$(".remove").on("click",function(){
+     				$(".clearall").hide();
+     				$(".zhezhao").hide();
+     			})
+     			$(".qingwan").on("click",function(){
+     				$(".clearall").hide();
+     				$(".zhezhao").hide();
+     			})
+     			$(".cheng").on("click",function(){
+     				$(".xiangxi-box").hide();
+     			})
+
+     		}
+     	}}])      
+  app.controller('mainCtrol',['$scope',function($scope){
 		$scope.Lists=[];
 		$scope.cu=0;
 		$scope.colors=["purple","green","blue","yellow","brown","red","orange"];
 		if(localStorage.remainder){
 			$scope.Lists=JSON.parse(localStorage.remainder)
 		}else{
-			$scope.Lists=[];
+			$scope.Lists=[{
+		     name:"aa",
+             id:1001,
+             theme:"purple",
+             todos:[
+             {name:"论马楠有多傻",state:0,id:1},
+             {name:"脑残",state:1,id:2}
+             ]
+			}
+            
+			];
 		}
 		$scope.save=function(){
 			localStorage.remainder=JSON.stringify($scope.Lists);
@@ -57,6 +129,16 @@ var app=angular.module("remainder",[]);
 			}
 			return (max==-Infinity)?1000:max;
 		}
+		function hasid(){
+			var max=-Infinity;
+			for(var i=0;i<$scope.Lists[$scope.cu].todos.length;i++){
+				var v=$scope.Lists[$scope.cu].todos[i];
+				if(v.id>max){
+					max=v.id
+				}
+			}
+			return (max==-Infinity)?1:max;
+		}
 		$scope.addlist=function(){
 			var len=$scope.Lists.length;
 			var index=len%7;
@@ -64,6 +146,7 @@ var app=angular.module("remainder",[]);
 				id:maxid()+1,
 				name:"新列表"+(len+1),
 				theme:$scope.colors[index],
+				todos:[]
 			}
 			$scope.Lists.push(v);
 		}
@@ -74,8 +157,34 @@ var app=angular.module("remainder",[]);
 		$scope.remove=function(index){
 			$scope.Lists.splice(index,1)
 		}
+		$scope.addtodos=function(){
+			var value=$(".input3").val();
+			$scope.Lists[$scope.cu].todos.push({name:value,state:0});
+			value="";
+		}
+		$scope.count=function(){
+			var r=0;
+			$scope.Lists[$scope.cu].todos.forEach(function(v,i){
+			 if(v.state==1){
+			   r++;
+			  }
+			})
+			return r;
+		}
+		$scope.clear=function(){
+			var arr=[];
+            $scope.Lists[$scope.cu].todos.forEach(function(v,i){
+		    if(v.state==0){
+		       arr.push(v)
+		    }
+	       $scope.Lists[$scope.cu].todos=arr;
+          })
+		}
+		$scope.shanchu=function(index){
+			$scope.Lists[$scope.cu].todos.splice(index,1);
+		}
 	}])
- app.directive("sel",[function(){
+  app.directive("sel",[function(){
 	 	return{
 	 		restrict:'A',
 	 		template: ' <div class="select"><div ng-transclude></div></div>' ,
@@ -93,5 +202,12 @@ var app=angular.module("remainder",[]);
 	          	$(".xuanxiang").hide();
 	          })
 	          $(".xuanxiang").on("click",false);
+	          $(".button .img").on("click",function(){
+	          	$(".button .img").toggleClass("huan");
+	          	$(".line1-box").toggle();
+	          	$(".kongbai").toggle();
+	          	$("#one").toggle();
+	          	$(".clear").toggle();
+	          })
 	        }
 	 	}}])

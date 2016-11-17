@@ -10,6 +10,7 @@ a{
 }
 body{
   background:#fff;
+  overflow:hidden;
 }
 *{
   font-family:"Microsoft YaHei",sans-serif;
@@ -56,7 +57,14 @@ $color:(
    .xuanxiang .inner .neili .biaomin .padding input.#{$v}{
       color:nth($l,3);
    }
+   .input1.#{$v},.input2.#{$v},.input3.#{$v}{
+      color:nth($l,3);
+   }
+   .line1-list .line1 .xian-top1.#{$v},.line1-list .line1 .xian-bottom1.#{$v},.line1-list .line1 .bgcolor.#{$v}{
+      background:nth($l,3);
+   }
  }
+ //选项内圆
  $incolor:( 
     "purple": 0px -231px,
     "green":  0px -256px,
@@ -74,7 +82,42 @@ $color:(
 	  background-repeat: no-repeat;
    }
  }
-
+//未完成
+$weiwancheng:(
+    'purple':-64px -401px,
+    'green':-74px -359px,
+    'blue':0px -433px,
+    'yellow':-32px -465px,
+    'brown':-32px -433px,
+    'red': -96px -433px,
+    'orange':-136px -235px
+);
+ @each $a in map_keys($weiwancheng){
+   $l:map_get($weiwancheng,$a);
+   .state2.#{$a}{
+      background-position:nth($l,1) nth($l,2);
+      background-image: url(../img/packed-5.png);
+	  background-repeat: no-repeat;
+   }
+ }
+ //已完成
+ $yiwancheng:(
+    'purple':-128px -401px,
+    'green':-136px -199px,
+    'blue':-106px -359px,
+    'yellow':-128px -433px,
+    'brown':-136px -167px,
+    'red': -64px -433px,
+    'orange':0px -401px
+ );
+ @each $a in map_keys($yiwancheng){
+   $l:map_get($yiwancheng,$a);
+   .state1.#{$a}{
+      background-position:nth($l,1) nth($l,2);
+      background-image: url(../img/packed-5.png);
+	  background-repeat: no-repeat;
+   }
+ }
 .body{
 	width:100%;
 	height:100%;
@@ -93,7 +136,6 @@ $color:(
 	 float:left;
 	 height:100%;
 	 background: #383836;
-	 overflow:auto;
 	.left-head{
 		 width:100%;
 		 height:44px;
@@ -171,7 +213,6 @@ $color:(
 		position:absolute;
 		left:0;
 		top:45px;
-		overflow:auto;
 		.list{
 		  position:absolute;
 		  left: 0px;
@@ -566,6 +607,10 @@ $color:(
 								    background-image: url(../img/packed-5.png);
 								    background-position: -23px -526px;
 								    background-repeat: no-repeat;
+								    &.huan{
+                                          
+                                        background-position:-96px -497px;
+								    }
 							    }
 						    }
 						    .clear{
@@ -601,30 +646,7 @@ $color:(
 								    bottom: 0px;
 							    }
 						    }
-						    .xiangqing{
-						        position:absolute;
-						        left: 0px;
-							    right: 0px;
-							    top: 54px;
-							    bottom: 0px;
-							    min-height: 94px;
-							   
-							    .date{
-							        position:absolute;
-							        right: 0px;
-								    top: 0px;
-								    height: 42px;
-								    left:29px;
-								    label{
-							            font-weight: 600;
-							            white-space: nowrap !important;
-									    font-size: 15px;
-									    color: #999;
-									    top: 17px;
-									    position:absolute;
-								    }
-							    }
-						    }
+						    
 				     }
 			     }
 		     }
@@ -634,12 +656,8 @@ $color:(
     }
 }
 .new-box{
-	position:absolute;
 	width:100%;
-	height:100%;
-	left: 0px;
-    right: 0px;
-    top: 162px;
+	height:52px;
     .new-ul{
 	    width:100%;
 	    height:100%;
@@ -659,6 +677,7 @@ $color:(
 	    top: 0px;
         left: 81px;
     }
+    
     .xian-bottom{
         position: absolute;
 	    right: 0px;
@@ -1177,8 +1196,11 @@ $color:(
 	position:relative;
 	width:100%;
 	height:100%;
-	top:42px;
-	 .line1{
+}
+.line1-list{
+		 width:100%;
+		 height:auto;
+      .line1{
         width:100%;
 	    height: 52px;
 	    position:relative;
@@ -1186,22 +1208,54 @@ $color:(
 	        position: absolute;
 		    left: 30px;
 		    right: 0px;
-		    height: 2px;
+		    height: 1px;
 		    background-image: url(../img/packed-3.png);
 		    background-position: 0px 0px;
 		    background-repeat: repeat;
 		    top: 0px;
+		    z-index:5;
 	    }
+	     .xian-top1{
+	        position: absolute;
+		    right: 0px;
+		    height: 1px;
+		    top: 0px;
+	        left: 0px;
+	        background:transparent;
+	        z-index:10;
+        }
 	    .xian-bottom{
 	        position: absolute;
 		    left: 30px;
 		    right: 0px;
-		    height: 2px;
+		    height: 1px;
 		    background-image: url(../img/packed-3.png);
 		    background-position: 0px 0px;
 		    background-repeat: repeat;
 		    overflow: visible;
 		    bottom: -2px;
+		    z-index:5;
+	    }
+	     .xian-bottom1{
+	        position: absolute;
+		    right: 0px;
+		    height: 1px;
+		    bottom: -2px;
+		    left: 0px;
+		    background:transparent;
+		    z-index:10;
+         }
+
+	    .bgcolor{
+	      position:absolute;
+	      left:0;
+	      top:0;
+	      width:100%;
+	      height:54px;
+	      background:transparent;
+	      z-index:1;
+	      opacity:0.1;
+
 	    }
 	    .xian-li{
 	        position: absolute;
@@ -1209,6 +1263,7 @@ $color:(
 		    top: 0;
 		    right: 0;
 		    bottom: 0;
+		    z-index:5;
 		    a{
 	            position: absolute;
 			    top: 12px;
@@ -1221,19 +1276,8 @@ $color:(
 			        height: 32px;
 				    width: 32px;
 				    margin: 0px;
-				    background: transparent;
 				    border: none;
 			    }
-			     .unchecked{
-				        background-image: url(../img/packed-5.png);
-					    background-position: -64px -401px;
-					    background-repeat: no-repeat;
-				}
-				.checked{
-				        background-image: url(../img/packed-5.png);
-					    background-position: -128px -401px;
-					    background-repeat: no-repeat;
-				}
 		    }
 		    label{
 		        position:absolute;
@@ -1274,6 +1318,7 @@ $color:(
 		        position: absolute;
 			    right: 25px;
 			    top: 17px;
+			    display:none;
 			    label{
 			        margin: 0px;
 				    overflow: hidden !important;
@@ -1290,4 +1335,84 @@ $color:(
 		    } 
 	    }
     }
+  }
+.kongbai{
+	width:100%;
+	height:25px;
+	background:transparent;
+}
+.line2-box{
+	width:100%;
+	height:auto;
+}
+//详情
+.xiangqing-box{
+	position:absolute;
+	left:0;
+	right:0;
+	top:54px;
+	bottom:0;
+	height:auto;
+	.xiangqing{
+    width:100%;
+   height:auto;
+    .date{
+        width:100%;
+	    height: 42px;
+	    position:relative;
+	    label{
+            font-weight: 600;
+            white-space: nowrap !important;
+		    font-size: 15px;
+		    color: #999;
+		    top: 17px;
+		    position:absolute;
+	    }
+	    .xian-top{   
+	        position: absolute;
+		    right: 0px;
+		    height: 1px;
+		    background-image: url(../img/packed-3.png);
+		    background-position: 0px 0px;
+		    background-repeat: repeat;
+		    bottom: -1px;
+		    left: 30px;
+	    }
+    }
+}
+}
+//右侧输入框
+.input1{
+	position: absolute;
+    right: 106px;
+    font-size: 19px;
+    line-height: 24px;
+    left: 81px;
+    top: 17px;
+    height: auto;
+    outline:none;
+    border:none;
+    background:transparent;
+}
+.input2{
+	position: absolute;
+    right: 106px;
+    font-size: 19px;
+    line-height: 24px;
+    left: 81px;
+    top: 17px;
+    height: auto;
+    background:transparent;
+    border:none;
+    outline:none;
+}
+.input3{
+	position: absolute;
+    top: 14px;
+    left: 81px;
+    color: #999;
+    font-size: 19px;
+    background:transparent;
+    border:none;
+    outline:none;
 }
