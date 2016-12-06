@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>iclond</title>
 	<link rel="stylesheet" href="./css/index.css">
-	<script src="http://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
-	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/jquery.js"></script>
 	<script src="js/index.js"></script>
 </head>
 <body ng-controller="mainCtrol">
@@ -115,7 +115,7 @@
 															<div class="state state1 {{Lists[cu].theme}}"></div>
 														</a>
 														<label></label>
-														<input type="text" class="input1  {{Lists[cu].theme}}" ng-model="v.name">
+														<input type="text" class="input1 inpu {{Lists[cu].theme}}" ng-model="v.name">
 														<div class="hidden">
 															<label></label>
 														</div>
@@ -140,7 +140,7 @@
 															<div class="state state2 {{Lists[cu].theme}}"></div>
 														</a>
 														<label></label>
-														<input type="text" class="input2 {{Lists[cu].theme}} inputt" ng-model="v.name">
+														<input type="text" class="input2 inpu {{Lists[cu].theme}} inputt" ng-model="v.name">
 														<div class="hidden">
 															<label>{{v.name}}</label>
 														</div>

@@ -7,6 +7,7 @@ var app=angular.module("remainder",[]);
      		transclude:true,
      		link:function($scope,el){
      			$(el).on("keyup",false);
+     			$(".inpu").on("keyup",false);
      			$(".xiangqing").on("keyup",false);
      			$(el).on("click",".list1",function(){
      				$(el).find(".list1").find(".list1-neirong").removeClass("active")
@@ -39,10 +40,23 @@ var app=angular.module("remainder",[]);
      				}
 
      			})
-     			$(document).on("keyup",function(e){
-     				
-
-     			})
+     			$(document).on("keyup",".line1",function(e){			
+					if(e.keyCode==8||e.keyCode==46){
+						var a=$(".line1 .inpu").val();
+						var b;
+						$scope.Lists[$scope.cu].todos.forEach(function(v,i){
+								if(v.name==a){
+									b=i
+								}
+							})
+						
+						$scope.$apply(function(){
+							$scope.Lists[$scope.cu].todos.splice(b,1);
+								
+						})
+					}
+					return false;
+				});
      			$(".line1-list").on("click",".line1",function(){
      				console.log(this)
      				var index=$(".line1").index($(this));
